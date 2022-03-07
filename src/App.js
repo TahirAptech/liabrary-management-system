@@ -3,7 +3,7 @@ import AddEditbook from './components/AddEditBook';
 import BookList from './components/BookList';
 import NavBar from './components/NavBar';
 
-function App(id) {//is id ki zarurat nhi hai..
+function App() {//is id ki zarurat nhi hai..
 
   const [bookId, setBookId] = useState("");
   const [myItem, setItem] = useState({});
