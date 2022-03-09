@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import bookService from '../services/bookService';
 
-function AddEditbook({ id, data, setItemFunc, setFlagFun }) {
-    debugger
+function AddEditbook({ id, data, resetBookItem, setFlagFun }) {
+    
     // console.log(data);
     // let [code, setCode] = useState(data ? data.item.code : '');
     // let [title, setTitle] = useState(data ? data.item.title : '');
@@ -41,7 +41,7 @@ function AddEditbook({ id, data, setItemFunc, setFlagFun }) {
         e.preventDefault();
         try {
             if (code && title && author && price) {
-                debugger
+                
                 let msg = '';
                 if (id) {
                     await bookService.updateBook(id, { code, title, author, price });
@@ -52,7 +52,7 @@ function AddEditbook({ id, data, setItemFunc, setFlagFun }) {
                     msg = "Record added successfully."
                 }
 
-                setItemFunc();
+                resetBookItem();
                 setCode("");
                 setTitle("");
                 setAuthor("");

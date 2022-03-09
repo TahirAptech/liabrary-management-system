@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import bookService from '../services/bookService';
 
-function BookList({ myflag, setFlagFun, bookHandler}) {
+function BookList({ myflag, setFlagFun, setBookItemForEdit}) {
 
     let [books, setBooks] = useState([]);//Tahir: for book list.
 
     useEffect(async () => {
+        debugger
         try {
             const bookList = await bookService.getAllBooks();
             let booksObj = [];
@@ -44,7 +45,7 @@ function BookList({ myflag, setFlagFun, bookHandler}) {
                                     <td>{book.item.author}</td>
                                     <td>{book.item.price}</td>
                                     <td>
-                                        <button className="btn btn-info" onClick={() => bookHandler({ item: book.item, id: book.id })}>Edit</button>
+                                        <button className="btn btn-info" onClick={() => setBookItemForEdit({ item: book.item, id: book.id })}>Edit</button>
                                         <button onClick={async () => { await bookService.deleteBook(book.id); setFlagFun(`${book.id+index}`)}} className="btn btn-danger mx-2">Delete</button>
                                     </td>
                                 </tr>

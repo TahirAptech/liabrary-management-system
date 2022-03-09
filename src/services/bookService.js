@@ -22,11 +22,11 @@ class BookService {
         return deleteDoc(doc(db, "books", id));
     };
     getAllBooks = () => {
-        return getDocs(bookCollectionRef);       
+        return getDocs(bookCollectionRef);
     };
     getBookById = (id) => {
         // const bookDoc = doc(db, "books", id);
-        return getDoc(doc(db, "books", id));        
+        return getDoc(doc(db, "books", id));
     };
 }
 
