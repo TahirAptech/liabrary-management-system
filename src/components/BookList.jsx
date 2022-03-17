@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import bookService from '../services/bookService';
 
-function BookList({ myflag, setFlagFun, setBookItemForEdit}) {
+function BookList({ myflag, setFlagFun, setBookItemForEdit }) {
 
     let [books, setBooks] = useState([]);//Tahir: for book list.
 
     useEffect(async () => {
-        debugger
+        
         try {
             const bookList = await bookService.getAllBooks();
             let booksObj = [];
@@ -20,9 +20,17 @@ function BookList({ myflag, setFlagFun, setBookItemForEdit}) {
     }, [myflag]);
 
 
+    //Delete Book.
+    const deleteBook = async (book, index) => {
+        if (window.confirm("Are you sure?")) {
+            await bookService.deleteBook(book.id);
+            setFlagFun(`${book.id + index}`);
+        }
+    }
+
     return (
-        <>
-            <table className="table table-striped w-50 mx-3 my-3">
+        <div className='row'>
+            <table className="col-md-12 my-5 table table-striped">
                 <thead className="table-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -45,8 +53,8 @@ function BookList({ myflag, setFlagFun, setBookItemForEdit}) {
                                     <td>{book.item.author}</td>
                                     <td>{book.item.price}</td>
                                     <td>
-                                        <button className="btn btn-info" onClick={() => setBookItemForEdit({ item: book.item, id: book.id })}>Edit</button>
-                                        <button onClick={async () => { await bookService.deleteBook(book.id); setFlagFun(`${book.id+index}`)}} className="btn btn-danger mx-2">Delete</button>
+                                        <button className="btn btn-info mr-1" onClick={() => setBookItemForEdit({ item: book.item, id: book.id })}>Edit</button>
+                                        <button onClick={() => deleteBook(book, index)} className="btn btn-danger my-2">Delete</button>
                                     </td>
                                 </tr>
                             )
@@ -54,7 +62,7 @@ function BookList({ myflag, setFlagFun, setBookItemForEdit}) {
                     }
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 export default BookList;

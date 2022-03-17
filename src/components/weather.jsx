@@ -52,7 +52,7 @@ const Weather = () => {
           <input
             onChange={event => setCityName(event.target.value)}
             onKeyPress={searchCity}
-            placeholder='Enter Location'
+            placeholder='Enter Location & hit enter'
             type="text" />
         </div>
         <div className="container">
@@ -74,10 +74,10 @@ const Weather = () => {
                 {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
                 <p>Humidity</p>
               </div>
-              {/* <div className="wind">
+              <div className="wind">
                 {data.wind ? <p className='bold'>{data.wind.speed.toFixed()} MPH</p> : null}
                 <p>Wind Speed</p>
-              </div> */}
+              </div>
               <div className="wind">
                 {data.weather && data.weather[0].main ? <p className='bold'>{data.weather[0].main}</p> : null}
                 <p>Condition</p>
